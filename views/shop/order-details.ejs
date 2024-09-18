@@ -1,0 +1,182 @@
+<style>
+  .card-header {
+    font-weight: bold;
+  }
+
+  .order-details-card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+
+  .order-summary-icon {
+    font-size: 1.5rem;
+  }
+
+  .address,
+  .contact-info {
+    line-height: 1.5;
+  }
+</style>
+
+<div class="container">
+  <!-- Order Summary -->
+  <div class="card my-4 order-details-card">
+    <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+      <span>Order Summary</span>
+      <span class="badge bg-light text-dark">Order ID: <%= order._id %></span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Stripe Session ID removed for privacy -->
+          <p><i class="bi bi-hash order-summary-icon"></i> <strong>Order Reference:</strong>
+            <%= order._id %>
+          </p>
+          <p><i class="bi bi-cash-stack order-summary-icon"></i> <strong>Subtotal:</strong> $<%=
+              order.amount_subtotal.toFixed(2) %>
+          </p>
+          <p><i class="bi bi-cash order-summary-icon"></i> <strong>Total:</strong> $<%= order.amount_total.toFixed(2) %>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p><i class="bi bi-calendar-check order-summary-icon"></i> <strong>Date:</strong>
+            <%= new Date(order.createdAt).toLocaleString('en-US', { month: 'long' , day: 'numeric' , year: 'numeric' ,
+              hour: 'numeric' , minute: 'numeric' , second: 'numeric' , hour12: true }) %>
+          </p>
+          <p><i
+              class="bi <%= order.status == 'Completed' ? 'bi-check-circle' : 'bi-stopwatch' %> order-summary-icon"></i>
+            <strong>Status:</strong> <span
+              class="badge <%= order.status == 'Completed' ? 'bg-success' : 'bg-warning' %>">
+              <%= order.status %>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Details -->
+  <div class="card mb-4 order-details-card">
+    <div class="card-header bg-secondary text-dark">
+      Customer Details
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 contact-info">
+          <p><i class="bi bi-person-fill me-2"></i><strong>Name:</strong>
+            <%= order.customer_details.name %>
+          </p>
+          <p><i class="bi bi-envelope-fill me-2"></i><strong>Email:</strong>
+            <%= order.customer_details.email %>
+          </p>
+          <p><i class="bi bi-telephone-fill me-2"></i><strong>Phone:</strong>
+            <%= order.customer_details.phone || 'N/A' %>
+          </p>
+        </div>
+        <div class="col-md-6 address">
+          <p><strong>Address:</strong></p>
+          <address>
+            <%- order.customer_details.address.line1 %><br>
+              <%- order.customer_details.address.line2 ? order.customer_details.address.line2 + '<br>' : '' %>
+                <%- order.customer_details.address.city %>, <%- order.customer_details.address.state %> <%-
+                      order.customer_details.address.postal_code %><br>
+                      <%- order.customer_details.address.country %>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shipping Details -->
+  <div class="card mb-4 order-details-card">
+    <div class="card-header bg-info text-dark">
+      Shipping Details
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><i class="bi bi-truck me-2"></i><strong>Carrier:</strong>
+            <%= order.shipping_details.shipping.carrier || 'N/A' %>
+          </p>
+          <p><i class="bi bi-box-seam me-2"></i><strong>Tracking Number:</strong>
+            <%= order.shipping_details.shipping.tracking_number || 'N/A' %>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Shipping Address:</strong></p>
+          <address>
+            <% if (order.shipping_details.shipping.address && order.shipping_details.shipping.address.line1) { %>
+              <%- order.shipping_details.shipping.address.line1 %><br>
+                <%- order.shipping_details.shipping.address.line2 ? order.shipping_details.shipping.address.line2
+                  + '<br>' : '' %>
+                  <%- order.shipping_details.shipping.address.city %>, <%- order.shipping_details.shipping.address.state
+                      %> <%- order.shipping_details.shipping.address.postal_code %><br>
+                        <%- order.shipping_details.shipping.address.country %>
+                          <% } else { %>
+                            <!-- Fallback to customer address if shipping address is not available -->
+                            <%- order.customer_details.address.line1 %><br>
+                              <%- order.customer_details.address.line2 ? order.customer_details.address.line2 + '<br>'
+                                : '' %>
+                                <%- order.customer_details.address.city %>, <%- order.customer_details.address.state %>
+                                    <%- order.customer_details.address.postal_code %><br>
+                                      <%- order.customer_details.address.country %>
+                                        <% } %>
+          </address>
+          <p><strong>Recipient:</strong>
+            <%= order.shipping_details.shipping.name || order.customer_details.name %>
+          </p>
+          <p><strong>Recipient Phone:</strong>
+            <%= order.shipping_details.shipping.phone || order.customer_details.phone || 'N/A' %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Line Items -->
+  <div class="card mb-4 order-details-card">
+    <div class="card-header bg-success text-white">
+      Line Items
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Title</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.line_items.forEach(item=> { %>
+            <tr>
+              <td>
+                <%= item.title %>
+              </td>
+              <td>&pound;<%= (item.unit_price / 100).toFixed(2) %>
+              </td>
+              <td>
+                <%= item.quantity %>
+              </td>
+              <td>&pound;<%= (item.price / 100).toFixed(2) %>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <% if (order.status !=='Completed' && user.role==='admin' ) { %>
+    <a class="btn btn-primary" href="/orders/complete/<%= order._id %>">
+      <i class="bi bi-check-circle-fill"></i>
+      <span>Complete Order</span>
+    </a>
+    <% } else { %>
+      <a class="btn btn-secondary" href="/orders">
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Orders</span>
+      </a>
+      <% } %>
+</div>

@@ -1,0 +1,106 @@
+<!-- Custom CSS -->
+<style>
+  :root {
+    --primary-bg-color: #f1f2f6;
+    --secondary-bg-color: #2f3542;
+    --border-radius: 10px;
+    --shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    --input-bg: #f8f9fa;
+    --input-border: #ced4da;
+  }
+
+  .holder {
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 86vh;
+    margin: 0;
+  }
+
+  .login-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .login-header h2 {
+    font-weight: bold;
+    color: var(--secondary-bg-color);
+  }
+
+  .form-control {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    height: 45px;
+  }
+
+  .forgot-password {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .forgot-password a {
+    color: var(--bs-dark);
+    text-decoration: none;
+  }
+
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+  .login-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary-bg-color);
+  }
+</style>
+
+<div class="holder">
+  <div class="login-container">
+    <div class="login-header">
+      <i class="bx bx-lock bx-lg"></i>
+      <h2>User <%= typeof signup !=='undefined' ? 'Registration' : 'Login' %>
+      </h2>
+    </div>
+    <form method="post" action="<%= typeof signup !== 'undefined' ? '/auth/signup' : '/auth/login' %>">
+      <% if (typeof signup !=='undefined' ) { %>
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp"
+            placeholder="Enter Your Name" required>
+        </div>
+        <% } %>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter password"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Proceed to <%= typeof signup !=='undefined'
+              ? 'Registration' : 'Login' %></button>
+          <div class="forgot-password">
+            <% if (typeof signup !=='undefined' ) { %>
+              <a href="/auth/login">Already have an account? | Login</a>
+              <% } else { %>
+                <a href="/auth/signup">Don't have an account? | Sign Up</a>
+                <% } %>
+          </div>
+    </form>
+  </div>
+</div>

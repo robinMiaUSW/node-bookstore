@@ -1,0 +1,119 @@
+<!-- Dashboard content -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3 mb-4">
+      <div class="card card-users text-center">
+        <div class="card-body">
+          <i class="bx bx-user"></i>
+          <h5 class="card-title">Users</h5>
+          <p class="card-text">
+            <%= users.length %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card card-revenue text-center">
+        <div class="card-body">
+          <i class="bx bx-dollar-circle"></i>
+          <h5 class="card-title">Revenue</h5>
+          <p class="card-text">&pound;<%= totalCollection %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card card-sales text-center">
+        <div class="card-body">
+          <i class="bx bx-book-open"></i>
+          <h5 class="card-title">Books</h5>
+          <p class="card-text">
+            <%= books.length %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card card-expenses text-center">
+        <div class="card-body">
+          <i class="bx bx-cart-download"></i>
+          <h5 class="card-title">Orders</h5>
+          <p class="card-text">
+            <%= orders.length %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity and Users Table with same height -->
+  <div class="row">
+    <!-- Users Table Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card same-height">
+        <div class="card-body">
+          <h5>Book Information</h5>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Genre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% books.forEach(book=> { %>
+                <tr>
+                  <td>
+                    <%= book.title %>
+                  </td>
+                  <td>
+                    <%= book.author %>
+                  </td>
+                  <td>
+                    <%=book.genre %>
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Users Table Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card same-height">
+        <div class="card-body">
+          <h5>User Information</h5>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user=> { %>
+                <tr>
+                  <td>
+                    <%= user.name %>
+                  </td>
+                  <td>
+                    <%= user.email %>
+                  </td>
+                  <td><span class="badge <%= user.role === 'admin' ? 'bg-success' : 'bg-warning' %> text-capitalize">
+                      <%= user.role %>
+                    </span></td>
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

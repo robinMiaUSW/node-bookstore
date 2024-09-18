@@ -1,0 +1,10 @@
+<main>
+  <h2>Our Books</h2>
+  <div class="row">
+    <% for( let i=0; i < books.length; i++ ) { %>
+      <div class="col-lg-2 col-md-3 col-sm-12">
+        <%- include('./partials/books/Card', {book: books[i]}) %>
+      </div>
+      <% } %>
+  </div>
+</main>

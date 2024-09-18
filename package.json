@@ -1,0 +1,35 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass:dev": "npx sass --watch sass:public/css --style expanded --no-source-map",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
+    "boxicons": "^2.1.4",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-fileupload": "^1.5.1",
+    "express-session": "^1.18.0",
+    "fs-extra": "^11.2.0",
+    "mongoose": "^8.5.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "sass": "^1.77.8",
+    "stripe": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4"
+  }
+}

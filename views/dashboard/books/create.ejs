@@ -1,0 +1,57 @@
+<div class="row mt-3 px-5">
+  <div class="card p-5 col-lg-6 col-md-8 col-sm-12">
+    <h1 class="py-2">Create Book</h1>
+    <form method="post" action="/books" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name of the book</label>
+        <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          required>
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" name="author" class="form-control" id="author" aria-describedby="emailHelp" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Short Description</label>
+        <input type="text" name="shortDescription" class="form-control" id="exampleInputPassword1" required>
+      </div>
+      <div class="mb-3">
+        <label for="longDescription" class="form-label">Long Description</label>
+        <input type="text" name="longDescription" class="form-control" id="longDescription" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputImage" class="form-label">Book Image</label>
+        <input type="file" accept=".jpg, .jpeg, .png" id="exampleInputImage" name="image" class="form-control" required>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="mb-3">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" name="isbn" class="form-control" id="isbn" required>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="mb-3">
+            <label for="publisher" class="form-label">Book Publisher</label>
+            <input type="text" name="publisher" class="form-control" id="publisher" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="mb-3">
+            <label for="genre" class="form-label">Book Genre</label>
+            <input type="text" name="genre" class="form-control" id="genre" required>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="mb-3">
+            <label for="exampleInputPrice" class="form-label">Book Price (&pound;)</label>
+            <input type="number" name="price" class="form-control" id="exampleInputPrice" required>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Book</button>
+    </form>
+  </div>
+</div>

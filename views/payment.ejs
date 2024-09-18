@@ -1,0 +1,35 @@
+<main class="container mt-5">
+  <!-- Card for Payment Status -->
+  <div class="card shadow-lg border-0">
+    <div class="card-body text-center p-5">
+
+      <!-- Conditional Rendering for Success or Failure -->
+      <% if (success) { %>
+        <!-- Success Message -->
+        <i class="bx bx-check-circle text-success bx-lg mb-3"></i>
+        <h2 class="text-success mb-4">Payment Successful!</h2>
+        <p class="text-muted">Thank you for your payment. Your order has been successfully processed.</p>
+        <a href="/orders" class="btn btn-success mt-3">View Orders</a>
+
+        <% } else { %>
+          <!-- Failure Message -->
+          <i class="bx bx-x-circle text-danger bx-lg mb-3"></i>
+          <h2 class="text-danger mb-4">Payment Failed!</h2>
+          <p class="text-muted">Unfortunately, we were unable to process your payment. Please try again or contact
+            support.</p>
+          <a href="/checkout" class="btn btn-danger mt-3">Try Again</a>
+          <a href="/contact-support" class="btn btn-outline-secondary mt-3">Contact Support</a>
+
+          <% } %>
+
+    </div>
+  </div>
+
+  <!-- Cart Items (Optional Section to Display) -->
+  <div class="cart-items mt-5">
+    <!-- Add cart item details here if needed -->
+  </div>
+</main>
+
+<!-- Include Boxicons -->
+<script src="https://cdn.jsdelivr.net/npm/boxicons@2.1.2/dist/boxicons.js"></script>

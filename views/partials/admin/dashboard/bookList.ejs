@@ -1,0 +1,75 @@
+<!-- <h3>List of Books</h3>
+
+<table class="table table-primary table-striped">
+  <thead>
+    <th>#</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Publisher</th>
+    <th>Price</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% for( let i=0; i < books.length; i++ ) { %>
+      <tr>
+        <td>
+          <%= i+1 %>
+        </td>
+        <td>
+          <%= books[i].title %>
+        </td>
+        <td>
+          <%= books[i].author %>
+        </td>
+        <td>
+          <%= books[i].publisher %>
+        </td>
+        <td>
+          <%= books[i].price %>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm">Edit</button>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table> -->
+
+<div class="card same-height">
+  <div class="card-body">
+    <h5>Book Information</h5>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Publisher</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(book=> { %>
+          <tr>
+            <td>
+              <%= book.title %>
+            </td>
+            <td>
+              <%= book.author %>
+            </td>
+            <td>
+              <%= book.publisher %>
+            </td>
+            <td>
+              <%=book.genre %>
+            </td>
+            <td>
+              &pound;<%=book.Price %>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

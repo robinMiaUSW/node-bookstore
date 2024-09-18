@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <!-- Boxicons CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      /* Define common variables for color and spacing */
+      --sidebar-bg-color: #B2F7EF;
+      --sidebar-hover-color: #8ac5be;
+      --card-bg-color: #f1f2f6;
+      --main-font-color: #3f3f3f;
+      --card-border-radius: 10px;
+      --card-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      --default-padding: 20px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    /* Sidebar Styles */
+
+
+    /* Content Area */
+    .content {
+      margin-left: 250px;
+      padding: var(--default-padding);
+      transition: margin-left 0.3s ease;
+    }
+
+    .content.collapsed {
+      margin-left: 80px;
+    }
+
+    .navbar {
+      height: 60px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--default-padding);
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .greeting {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Card Styles with Pastel Colors */
+    .card {
+      background-color: var(--card-bg-color);
+      border: none;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-box-shadow);
+      height: 100%;
+      /* Make cards equal height */
+    }
+
+    .card-title {
+      font-weight: bold;
+    }
+
+    .card-body i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    /* Vibrant Pastel Colors for Cards */
+    .card-users {
+      background-color: #F2B5D4;
+      color: var(--main-font-color);
+    }
+
+    .card-revenue {
+      background-color: #7BDFF2;
+      color: var(--main-font-color);
+    }
+
+    .card-sales {
+      background-color: #fbf8cc;
+      color: var(--main-font-color);
+    }
+
+    .card-expenses {
+      background-color: #B2F7EF;
+      color: var(--main-font-color);
+    }
+
+    /* Ensure that both cards have the same height */
+    .same-height {
+      min-height: 300px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: white;
+      border-top: 1px solid #e9ecef;
+      text-align: center;
+    }
+
+    .activity-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .activity-list li {
+      margin-bottom: 10px;
+    }
+
+    .activity-list i {
+      color: #2ed573;
+      margin-right: 10px;
+    }
+
+    .table {
+      background-color: var(--card-bg-color);
+    }
+  </style>
+  <%- style %>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <%- include('../partials/admin/v2/_sidebar.ejs') %>
+
+    <!-- Main content -->
+    <div class="content" id="content">
+      <!-- Navbar -->
+      <%- include('../partials/admin/v2/_navbar.ejs') %>
+
+        <!-- Dashboard content -->
+        <%- body %>
+
+          <!-- Footer -->
+          <%- include('../partials/admin/v2/_footer.ejs') %>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript and Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/boxicons@latest/js/boxicons.min.js"></script>
+
+    <!-- Custom Script for Sidebar Toggle and Sub-menu -->
+    <script>
+      // Sidebar toggle functionality for expanding/collapsing sidebar
+      const toggleBtn = document.getElementById('toggleBtn');
+      const sidebar = document.getElementById('sidebar');
+      const content = document.getElementById('content');
+
+      toggleBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('collapsed');
+        content.classList.toggle('collapsed');
+        toggleBtn.classList.toggle('collapsed');
+      });
+
+      // Dynamic Submenu Toggle
+      const expandableMenus = document.querySelectorAll('.expandable');
+
+      expandableMenus.forEach(menu => {
+        menu.addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent default anchor behavior
+
+          const subMenuId = menu.nextElementSibling.id; // Get the ID of the next sibling (submenu)
+          const subMenu = document.getElementById(subMenuId); // Target the submenu
+
+          if (subMenu) {
+            // Toggle submenu visibility
+            subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+
+            // Toggle the collapse icon (rotate)
+            const icon = menu.querySelector('.bx-chevron-down');
+            if (icon) {
+              icon.classList.toggle('rotate');
+            }
+
+            // Optionally add an active class to the menu for styling purposes
+            menu.classList.toggle('active');
+          }
+        });
+      });
+
+    </script>
+    <%- script %>
+</body>
+
+</html>

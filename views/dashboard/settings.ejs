@@ -1,0 +1,64 @@
+<style>
+  .profile-container {
+    max-width: 900px;
+    margin: 30px auto;
+  }
+
+  .profile-header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .profile-header h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .profile-details,
+  .password-update {
+    margin-bottom: 30px;
+  }
+</style>
+
+<div class="container profile-container">
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <h2>User Profile</h2>
+  </div>
+
+  <!-- User Details Section -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">User Details</h5>
+      <p><strong>Name:</strong>
+        <%= user.name %>
+      </p>
+      <p><strong>Email:</strong>
+        <%= user.email %>
+      </p>
+    </div>
+  </div>
+
+  <!-- Password Update Section -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Update Password</h5>
+      <form action="/profile/update-password" method="POST">
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Current Password</label>
+          <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm New Password</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Password</button>
+      </form>
+    </div>
+  </div>
+</div>

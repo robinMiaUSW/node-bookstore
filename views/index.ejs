@@ -1,0 +1,80 @@
+<main role="main" class="container mt-5">
+  <!-- Hero Section -->
+  <section class="text-center mb-5">
+    <% if (typeof inDashboard=='undefined' ) { %>
+      <h1 class="display-3 font-weight-bold">Discover Your Next Favorite Book</h1>
+      <% } %>
+        <p class="lead text-muted">Browse through our curated selection of books tailored just for you.</p>
+
+        <!-- Search Box -->
+        <div class="mb-4">
+          <div class="input-group mx-auto" style="max-width: 600px;">
+            <input type="text" id="search-input" class="form-control" placeholder="Search for books..."
+              aria-label="Search for books">
+          </div>
+        </div>
+  </section>
+
+  <!-- Top Picks Section -->
+  <% if (typeof inDashboard=='undefined' ) { %>
+    <section class="mb-5">
+      <h2 class="text-center mb-4">Top Picks</h2>
+      <div id="top-picks" class="row">
+        <% topPicks.forEach(book=> { %>
+          <div class="col-md-3 mb-4 book-card" data-title="<%= book.title %>" data-author="<%= book.author %>"
+            data-genre="<%= book.genre %>" data-publisher="<%= book.publisher %>">
+            <%- include('./partials/books/Card', { book: book, reviews: [] }) %> <!-- Include card partial -->
+          </div>
+          <% }) %>
+      </div>
+    </section>
+    <% } %>
+
+      <!-- Book Cards Grid -->
+      <section>
+        <% if (typeof inDashboard=='undefined' ) { %>
+          <h2 class="text-center mb-4">Browse Our Collection</h2>
+          <% } %>
+            <div id="book-collection" class="row">
+              <% books.forEach(book=> { %>
+                <div class="col-md-3 mb-4 book-card" data-title="<%= book.title %>" data-author="<%= book.author %>"
+                  data-genre="<%= book.genre %>" data-publisher="<%= book.publisher %>">
+                  <%- include('./partials/books/Card', { book: book, reviews: [] }) %> <!-- Include card partial -->
+                </div>
+                <% }) %>
+            </div>
+      </section>
+</main>
+
+<script>
+  // search-script.js
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search-input');
+    const bookCollection = document.getElementById('book-collection');
+    const topPicks = document.getElementById('top-picks');
+
+    searchInput.addEventListener('input', function () {
+      const query = searchInput.value.toLowerCase();
+      filterBooks(query);
+    });
+
+    function filterBooks(query) {
+      const bookCards = document.querySelectorAll('.book-card');
+
+      bookCards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const author = card.getAttribute('data-author').toLowerCase();
+        const genre = card.getAttribute('data-genre').toLowerCase();
+        const publisher = card.getAttribute('data-publisher').toLowerCase();
+
+        if (title.includes(query) || author.includes(query) || genre.includes(query) || publisher.includes(query)) {
+          card.style.display = ''; // Show the card
+        } else {
+          card.style.display = 'none'; // Hide the card
+        }
+      });
+    }
+  });
+
+</script>

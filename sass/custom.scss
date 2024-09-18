@@ -1,0 +1,61 @@
+// Step 1: Import Bootstrap's functions
+@import "../node_modules/bootstrap/scss/functions";
+
+// Step 2: Override default variables with custom colors
+$primary: #B2F7EF; // Light Minty Aqua for primary color
+$secondary: #F7D6E0; // Soft Pastel Pink for secondary color
+$accent: #F4A261; // Soft Orange Accent
+$success: #81B29A; // Muted Pastel Green for success
+$info: #F4A261; // Soft Orange for info
+$warning: #E9C46A; // Warm Yellow for warning
+$danger: #E76F51; // Coral for danger
+$dark: #555555; // Soft Charcoal Grey for dark elements
+
+
+// Step 3: Use Sass functions to darken the colors for better contrast
+@function darken-color($color, $amount: 15%) {
+  @return darken($color, $amount);
+}
+
+// Step 4: Define the darker colors for outline buttons
+$primary-dark: darken($primary, 50%);
+$secondary-dark: darken-color($secondary, 50%);
+
+.bg-accent {
+  background-color: $accent;
+}
+.bg-success {
+  background-color: $success;
+}
+
+// Step 5: Improved outlined button styles for better contrast
+.btn-outline-primary {
+  border-color: $primary-dark !important;
+  border-width: 2px; // Increase border thickness for better visibility
+  color: $primary-dark !important;
+  &:hover {
+    background-color: $primary !important;
+    color: $dark !important; // White text on hover for contrast
+  }
+}
+
+.btn-outline-secondary {
+  border-color: $secondary-dark;
+  border-width: 2px;
+  color: $secondary-dark;
+  &:hover {
+    background-color: $secondary-dark;
+    color: #ffffff !important;
+  }
+}
+
+// // Step 6: Ensure card contrast and readability
+// .card-body {
+//   background-color: #f8f9fa; // Light grey for contrast
+//   color: #000000; // Dark text for better contrast
+// }
+
+// Step 7: Import Bootstrap to apply the changes
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/boxicons/css/boxicons.min.css";

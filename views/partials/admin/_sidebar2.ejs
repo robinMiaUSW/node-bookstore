@@ -1,0 +1,49 @@
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: var(--bs-primary);
+    /* Use Bootstrap's primary color */
+  }
+
+  .sidebar .nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    padding: 15px 25px;
+  }
+
+  .sidebar .nav-link.active,
+  .sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Use a lighter overlay on active or hover */
+  }
+</style>
+
+<!-- Sidebar -->
+<nav class="navbar navbar-dark d-flex flex-column sidebar">
+  <h4 class="text-white text-center mt-3 mb-4">Admin Panel</h4>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link text-white active" href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i>
+        Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/books/create"><i class="fas fa-boxes"></i> books</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/admin/users"><i class="fas fa-users"></i> Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/admin/orders"><i class="fas fa-shopping-cart"></i> Orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/admin/settings"><i class="fas fa-cogs"></i> Settings</a>
+    </li>
+    <li class="nav-item mt-auto">
+      <a class="nav-link text-white" href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </li>
+  </ul>
+</nav>

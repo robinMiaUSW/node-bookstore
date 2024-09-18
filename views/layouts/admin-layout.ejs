@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - CHUKA E-Commerce</title>
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/styles.css" />
+  <%- style %>
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+
+      .content-wrapper {
+        margin-left: 250px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+      }
+    </style>
+</head>
+
+<body>
+  <%- include('../partials/admin/_sidebar.ejs') %>
+
+    <%- include('../partials/admin/_navbar.ejs') %>
+
+      <!-- Main Content Wrapper -->
+      <div class="content-wrapper">
+        <!-- Page Content -->
+        <main>
+          <%- body %>
+        </main>
+      </div>
+
+      <script type="module" src="/main.js"></script>
+      <%- script %>
+</body>
+
+</html>

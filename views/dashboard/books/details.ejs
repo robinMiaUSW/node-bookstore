@@ -1,0 +1,113 @@
+<main role="main" class="container mt-5">
+  <!-- Book Details -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="<%= book.image.imagePath %>" class="card-img-top" alt="<%= book.title %>">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h1 class="display-4">
+        <%= book.title %>
+      </h1>
+      <h4 class="text-muted">by <%= book.author %>
+      </h4>
+      <p class="lead mt-3">
+        <%= book.shortDescription %>
+      </p>
+      <p>
+        <%= book.longDescription %>
+      </p>
+      <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 class="text-success">&pound;<%= book.price.toFixed(2) %>
+        </h3>
+        <a href="/cart/add/<%= book._id %>" class="btn btn-primary">Add To Cart</a>
+      </div>
+      <hr>
+
+      <!-- Average Rating with Stars -->
+      <div class="mt-4">
+        <% const totalRating=reviews.reduce((acc, review)=> acc + review.rating, 0);
+          const avgRating = reviews.length ? totalRating / reviews.length : 0;
+          const fullStars = Math.floor(avgRating);
+          const halfStar = avgRating % 1 >= 0.5;
+          %>
+          <h4>Average Rating:</h4>
+          <div class="d-flex align-items-center">
+            <!-- Render Full Stars -->
+            <% for (let i=0; i < fullStars; i++) { %>
+              <i class="bi bi-star-fill text-warning"></i>
+              <% } %>
+
+                <!-- Render Half Star -->
+                <% if (halfStar) { %>
+                  <i class="bi bi-star-half text-warning"></i>
+                  <% } %>
+
+                    <!-- Render Empty Stars -->
+                    <% for (let i=fullStars + (halfStar ? 1 : 0); i < 5; i++) { %>
+                      <i class="bi bi-star text-warning"></i>
+                      <% } %>
+
+                        &nbsp;
+
+                        <span class="ml-2">
+                          <%= avgRating.toFixed(1) %> / 5
+                        </span>
+          </div>
+      </div>
+
+      <!-- Add Review Section -->
+      <div class="mt-4">
+        <h4>Add a Review</h4>
+        <form action="/reviews/<%= book._id %>" method="POST">
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea class="form-control" id="comment" name="reviewText" rows="3" required></textarea>
+          </div>
+          <div class="form-group mt-2">
+            <label for="rating">Rating</label>
+            <select class="form-control" id="rating" name="rating" required>
+              <option value="">Select a rating</option>
+              <option value="1">1 - Poor</option>
+              <option value="2">2 - Fair</option>
+              <option value="3">3 - Good</option>
+              <option value="4">4 - Very Good</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
+        </form>
+      </div>
+
+      <!-- Reviews Section -->
+      <div class="mt-4">
+        <h4>Reviews</h4>
+        <% if (reviews.length> 0) { %>
+          <ul class="list-unstyled">
+            <% reviews.forEach(function(review) { %>
+              <li class="media mb-3">
+                <img
+                  src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                  class="mr-3" alt="User" width="50">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">
+                    <%= review.reviewer.name %>
+                  </h5>
+                  <p>
+                    <%= review.reviewText %>
+                  </p>
+                  <p class="text-muted">Rating: <%= review.rating %> / 5</p>
+                </div>
+              </li>
+              <% }) %>
+          </ul>
+          <% } else { %>
+            <p>No reviews yet.</p>
+            <% } %>
+      </div>
+
+    </div>
+  </div>
+</main>

@@ -1,0 +1,42 @@
+<div class="card same-height mt-3">
+  <div class="card-body">
+    <h5>Book Information</h5>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Publisher</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(book=> { %>
+          <tr>
+            <td>
+              <%= book.title %>
+            </td>
+            <td>
+              <%= book.author %>
+            </td>
+            <td>
+              <%= book.publisher %>
+            </td>
+            <td>
+              <%=book.genre %>
+            </td>
+            <td>
+              &pound;<%=book.price %>
+            </td>
+            <td>
+              <a class="btn btn-sm btn-warning">Edit</a>
+              <a class="btn btn-danger btn-sm shadow-sm">Delete</a>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
